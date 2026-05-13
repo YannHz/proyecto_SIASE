@@ -1,0 +1,139 @@
+
+.barra-lateral {
+  width: 320px;
+  background-color: #F4F7FA; 
+  color: #1E293B; 
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  z-index: 990;
+}
+
+.barra-toggle-btn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: #F4F7FA;
+  color: var(--color-nav-bg);
+  border: none;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 8px;
+  z-index: 1000;
+  cursor: pointer;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.barra-toggle-btn:hover {
+  background-color: #E2E8F0;
+}
+
+.barra-lateral-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.barra-lateral-title {
+  font-size: var(--text-main-title);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 3px solid var(--color-nav-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(38, 65, 134, 0.15);
+}
+
+.avatar-icon {
+  width: 70px;
+  height: 70px;
+  color: var(--color-nav-bg);
+}
+
+.alumno-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: var(--text-subtitle);
+  font-weight: 600;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  color: var(--color-nav-bg);
+  font-size: var(--text-detail);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0.6;
+}
+
+.empty-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  color: var(--color-primary);
+}
+
+.empty-text {
+  font-size: var(--text-body);
+  font-weight: 600;
+  padding: 0 16px;
+}
+
+@media (max-width: 1024px) {
+  .barra-lateral {
+    position: absolute;
+    height: calc(100vh - 60px);
+    transform: translateX(-100%);
+  }
+  
+  .barra-lateral.open {
+    transform: translateX(0);
+    box-shadow: 4px 0 15px rgba(0,0,0,0.15);
+  }
+
+  .barra-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .barra-toggle-btn.open {
+    left: 320px;
+  }
+}

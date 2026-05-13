@@ -1,0 +1,100 @@
+
+.navegacion-superior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.guardia-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.guardia-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--color-nav-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+}
+
+.guardia-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.guardia-name {
+  font-size: var(--text-body);
+  font-weight: bold;
+  color: var(--color-black-text);
+  text-transform: uppercase;
+}
+
+.guardia-role {
+  font-size: var(--text-detail);
+  color: var(--color-secondary-text);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 450px;
+  justify-content: flex-end;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  border: 1px solid var(--color-black-text);
+  border-radius: 6px;
+  padding: 8px 40px 8px 16px;
+  outline: none;
+  font-size: var(--text-body);
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: var(--color-cursor-accent);
+  box-shadow: 0 0 0 1px var(--color-cursor-accent);
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-secondary-text);
+  width: 20px;
+  height: 20px;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid transparent;
+  color: #EF4444;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.logout-button:hover {
+  background-color: #FEE2E2;
+  border-color: #FCA5A5;
+}

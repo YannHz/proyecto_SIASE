@@ -1,0 +1,144 @@
+
+.resultados-panel {
+  flex: 1;
+  overflow: hidden;
+}
+
+.resultados-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.resultados-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .resultados-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .resultados-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.alumno-card {
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  background-color: var(--color-white);
+  transition: all 0.2s ease-in-out;
+}
+
+.alumno-card:hover {
+  border-color: #D1D5DB;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.alumno-card.selected {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  outline: 1px solid var(--color-primary);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.badge-id {
+  background-color: #F3F4F6;
+  color: var(--color-secondary-text);
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.badge-status {
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-status.ingreso {
+  background-color: #F0FDF4;
+  color: #15803D;
+}
+
+.badge-status.salida {
+  background-color: #FEF2F2;
+  color: #B91C1C;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-dot.ingreso { background-color: #22C55E; }
+.status-dot.salida { background-color: #EF4444; }
+
+.card-body {
+  margin-bottom: 24px;
+}
+
+.card-subtitle {
+  font-size: 10px;
+  font-weight: bold;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.alumno-name {
+  font-weight: bold;
+  color: var(--color-nav-bg);
+  font-size: var(--text-subtitle);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #9CA3AF;
+  font-size: 12px;
+}
+
+.date-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.chevron-icon {
+  width: 16px;
+  height: 16px;
+  color: #D1D5DB;
+}
+
+.alumno-card.selected .chevron-icon {
+  color: var(--color-primary);
+}

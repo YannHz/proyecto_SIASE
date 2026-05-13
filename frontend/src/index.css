@@ -1,0 +1,66 @@
+:root {
+  --color-primary: #08C0CB;
+  --color-background: #F3F4F6;
+  --color-secondary-text: #7992A6;
+  --color-white: #FFFFFF;
+  --color-nav-bg: #264186;
+  --color-cursor-accent: #02BBF3;
+  --color-btn-red: #FF0000;
+  --color-btn-green: #6FDE5E;
+  --color-black-text: #1C1C1C;
+  
+  --font-sans: "Noto Sans", Helvetica, Arial, sans-serif;
+  
+  --text-main-title: 20px;
+  --text-subtitle: 16px;
+  --text-body: 14px;
+  --text-detail: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-black-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+}
+
+.card-panel {
+  border: 1px solid var(--color-black-text);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: var(--text-detail);
+  font-weight: bold;
+  color: var(--color-black-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.card-title.center {
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 24px;
+  padding-top: 8px;
+}
+
+.title-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-black-text);
+  border-radius: 50%;
+  display: inline-block;
+}

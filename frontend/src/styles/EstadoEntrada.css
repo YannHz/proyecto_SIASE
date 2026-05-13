@@ -1,0 +1,91 @@
+
+.estado-panel {
+  justify-content: space-between;
+  height: 100%;
+}
+
+.estado-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  flex: 1;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 8px;
+}
+
+.btn-action {
+  color: var(--color-white);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  width: 128px;
+  height: 48px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-body);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-action:disabled {
+  background-color: #D1D5DB;
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.btn-entrada {
+  background-color: var(--color-btn-green);
+  border: 1px solid #15803D;
+}
+
+.btn-entrada:not(:disabled):hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-salida {
+  background-color: var(--color-btn-red);
+  border: 1px solid #991B1B;
+}
+
+.btn-salida:not(:disabled):hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.ultimo-registro {
+  text-align: center;
+  margin-top: 16px;
+  font-size: var(--text-detail);
+  font-weight: 600;
+  color: var(--color-secondary-text);
+  background-color: #F9FAFB;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #F3F4F6;
+}
+
+.registro-estado {
+  margin-left: 4px;
+  font-weight: bold;
+}
+
+.registro-estado.ingreso {
+  color: #16A34A;
+}
+
+.registro-estado.salida {
+  color: #DC2626;
+}
