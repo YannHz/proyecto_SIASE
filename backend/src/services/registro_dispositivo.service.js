@@ -38,7 +38,7 @@ class RegistroDispositivoService {
   }
 
   async marcarSalida(registroId) {
-    return await registroRepository.marcarSalida(registroId);
+    return await registroRepository.marcarSalida(registroId); 
   }
 }
 

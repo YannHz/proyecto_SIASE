@@ -30,8 +30,6 @@ exports.obtenerAlumnoFormateadoPorId = async (id) => {
   return rows[0];
 };
 
-const pool = require('../config/db');
-
 exports.obtenerAlumnoPorId = (id, callback) => {
   const sql = "SELECT id, nombres, apellidos, idsenati, semestre, carrera_id, estado FROM datos_alumnos WHERE id = ?";
   db.query(sql, [id], (err, resultados) => {
@@ -43,9 +41,15 @@ exports.obtenerAlumnoPorId = (id, callback) => {
   });
 };
 
-exports.obtenerAlumnoPorCredenciales = async (usuario, password) => {
-  const query = "SELECT id, nombres, apellidos, idsenati, carrera_id, semestre, estado FROM datos_alumnos WHERE idsenati = ? AND password_alumno = ? AND estado = 1";
-  const [rows] = await db.promise().query(query, [usuario, password]);
+exports.obtenerDatosAlumnoPorId = async (id) => {
+  const sql = "SELECT id, nombres, apellidos, idsenati, semestre, carrera_id, estado FROM datos_alumnos WHERE id = ?";
+  const [rows] = await db.promise().query(sql, [id]);
+  return rows[0];
+};
+
+exports.obtenerAlumnoPorCredenciales = async (usuario) => {
+  const query = "SELECT id, nombres, apellidos, idsenati, carrera_id, semestre, estado, password_alumno FROM datos_alumnos WHERE idsenati = ? AND estado = 1";
+  const [rows] = await db.promise().query(query, [usuario]);
   return rows;
 };
 

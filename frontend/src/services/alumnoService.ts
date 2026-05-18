@@ -6,7 +6,16 @@ const API_URL = `${API_BASE}/api/alumnos`;
 export const obtenerAlumno = async (
   id: number
 ): Promise<Alumno> => {
-  const response = await fetch(`${API_URL}/${id}`);
+  // Recuperamos el token almacenado localmente en el momento de la petición
+  const token = localStorage.getItem("auth_token");
+
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "GET", 
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` // Inyección del token de sesión
+    }
+  });
 
   if (!response.ok) {
     throw new Error("Error al obtener alumno");

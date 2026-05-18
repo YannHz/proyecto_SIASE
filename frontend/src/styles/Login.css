@@ -68,6 +68,38 @@
   box-shadow:0 0 0 4px rgba(30,58,138,0.12);
 }
 
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.password-container .input {
+  width: 100%;
+  padding-right: 40px;
+  margin-bottom: 0;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.toggle-password:hover {
+  color: #374151;
+}
+
 .button{
   padding:14px;
   margin-top:8px;

@@ -111,7 +111,28 @@
   border: none;
   color: var(--color-white);
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Overlay oscuro detrás del menú */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: 60px;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+  backdrop-filter: blur(2px);
+}
+
+.mobile-menu-overlay.active {
+  display: block;
 }
 
 .mobile-menu {
@@ -124,22 +145,25 @@
   }
 
   .mobile-menu-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .mobile-menu {
     position: fixed;
     top: 60px;
-    right: -100%;
-    width: 250px;
+    right: -280px;
+    width: 280px;
     height: calc(100vh - 60px);
     background: white;
-    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-    transition: right 0.3s ease;
-    padding: 30px 20px;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 24px 20px;
     z-index: 999;
     display: flex;
     flex-direction: column;
+    border-radius: 0;
   }
 
   .mobile-menu.active {
@@ -149,14 +173,25 @@
   .mobile-nav-item {
     color: var(--color-nav-bg);
     text-decoration: none;
-    padding: 12px 0;
+    padding: 16px 8px; /* más grande para touch */
     font-size: var(--text-subtitle);
     font-weight: 600;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+
+  .mobile-nav-item:hover,
+  .mobile-nav-item:active {
+    background: rgba(38, 65, 134, 0.06);
+    padding-left: 14px;
   }
 
   .mobile-nav-item.active {
     color: var(--color-cursor-accent);
+    background: rgba(2, 187, 243, 0.06);
   }
 
   .mobile-logout-btn {
@@ -168,9 +203,21 @@
     border: none;
     color: white;
     font-size: var(--text-subtitle);
-    padding: 12px 0;
+    font-weight: 600;
+    padding: 14px;
     cursor: pointer;
     margin-top: auto;
     margin-bottom: 20px;
+    border-radius: 10px;
+    transition: background 0.2s;
+  }
+
+  .mobile-logout-btn:active {
+    background: #b91c1c;
+  }
+
+  /* Navbar padding en móvil */
+  .navbar-container {
+    padding: 0 16px;
   }
 }

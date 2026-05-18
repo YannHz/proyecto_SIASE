@@ -5,8 +5,9 @@ import DashboardAlumno from "./pages/DashboardAlumno";
 import QRVigilante from "./pages/QRVigilante";
 import QRAlumno from "./pages/QRAlumno";
 import AsistenciaAlumno from "./pages/AsistenciaAlumno";
-import AsistenciaVigilante from "./pages/AsistenciaVigilante";
+import ListaEstudiantes from "./pages/ListaEstudiantes";
 import ProtectedRoute from "./components/ProtectedRoute";
+import EscanerAlumno from "./pages/EscanerAlumno";
 
 function App() {
   return (
@@ -24,6 +25,15 @@ function App() {
           }
         />
         <Route
+          path="/dashboard-vigilante/qr-vigilante"
+          element={
+            <ProtectedRoute requiredRole="vigilante">
+              <QRVigilante />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/dashboard-alumno"
           element={
             <ProtectedRoute requiredRole="alumno">
@@ -31,14 +41,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/qr-vigilante"
-          element={
-            <ProtectedRoute requiredRole="vigilante">
-              <QRVigilante />
-            </ProtectedRoute>
-          }
-        />
+
         <Route
           path="/qr-alumno"
           element={
@@ -47,6 +50,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/escaner-alumno"
+          element={
+            <ProtectedRoute requiredRole="alumno">
+              <EscanerAlumno />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/asistencia-alumno"
           element={
@@ -56,16 +69,18 @@ function App() {
           }
         />
         <Route
-          path="/asistencia-vigilante"
+          path="/ListaEstudiantes"
           element={
             <ProtectedRoute requiredRole="vigilante">
-              <AsistenciaVigilante />
+              <ListaEstudiantes />
             </ProtectedRoute>
           }
         />
+
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App;
+export default App;

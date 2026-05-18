@@ -117,9 +117,13 @@
 
 @media (max-width: 1024px) {
   .barra-lateral {
-    position: absolute;
+    position: fixed; /* fixed para que flote sobre el contenido */
+    top: 60px;
+    left: 0;
     height: calc(100vh - 60px);
+    z-index: 990;
     transform: translateX(-100%);
+    box-shadow: none;
   }
   
   .barra-lateral.open {
@@ -131,9 +135,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    top: calc(60px + 50%);
+    left: 0;
+    transform: translateY(-50%);
   }
 
   .barra-toggle-btn.open {
     left: 320px;
+  }
+}
+
+/* ── Móvil ─────────────────────────── */
+@media (max-width: 640px) {
+  .barra-lateral {
+    width: 280px;
+  }
+
+  .barra-toggle-btn.open {
+    left: 280px;
+  }
+
+  .barra-lateral-title {
+    font-size: var(--text-subtitle);
+  }
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+  }
+
+  .avatar-icon {
+    width: 52px;
+    height: 52px;
   }
 }

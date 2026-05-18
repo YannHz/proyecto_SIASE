@@ -34,10 +34,10 @@ const escanearQR = async (req, res) => {
     const { token, alumno_id, guardia_id } = req.body;
     try {
         await tokensVigilanteService.escanearQR(token, alumno_id, guardia_id);
-        res.json({ success: true, message: "Asistencia marcada con exito y QR renovado" });
+        res.json({ success: true, message: "Asistencia marcada con exito" });
     } catch (error) {
         if (error.message === "Token invalido") {
-            return res.status(400).json({ error: "Token invalido, expirado o ya usado" });
+            return res.status(400).json({ error: "Token invalido o ya usado" });
         }
         res.status(500).json({ error: error.message });
     }

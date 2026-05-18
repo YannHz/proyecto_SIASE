@@ -5,12 +5,15 @@
   justify-content: space-between;
   padding: 16px 24px;
   border-bottom: 1px solid #E5E7EB;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .guardia-info {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .guardia-avatar {
@@ -97,4 +100,40 @@
 .logout-button:hover {
   background-color: #FEE2E2;
   border-color: #FCA5A5;
+}
+
+/* ── Tablet ─────────────────────────────────── */
+@media (max-width: 1024px) {
+  .navegacion-superior {
+    padding: 12px 16px;
+  }
+
+  .nav-actions {
+    max-width: 100%;
+  }
+}
+
+/* ── Móvil ───────────────────────────────────── */
+@media (max-width: 640px) {
+  .navegacion-superior {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .guardia-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-actions {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .search-input {
+    padding: 10px 40px 10px 14px; /* más cómodo para touch */
+    font-size: 16px; /* evita zoom automático en iOS */
+  }
 }

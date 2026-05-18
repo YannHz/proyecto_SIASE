@@ -17,36 +17,42 @@ const obtenerTokensActivos = async (guardia_id) => {
 };
 
 const rotarToken = async (guardia_id) => {
+    const conn = await tokensRepo.obtenerConexion();
     const nuevoToken = crypto.randomUUID();
     try {
-        await tokensRepo.iniciar();
-        await tokensRepo.desactivarAntiguo(guardia_id);
-        await tokensRepo.crearToken(nuevoToken, guardia_id);
-        await tokensRepo.confirmar();
+        await conn.beginTransaction();
+        await tokensRepo.desactivarAntiguo(guardia_id, conn);
+        await tokensRepo.crearToken(nuevoToken, guardia_id, conn);
+        await conn.commit();
         return nuevoToken;
     } catch (error) {
-        await tokensRepo.cancelar();
+        await conn.rollback();
         throw error;
+    } finally {
+        conn.release();
     }
 };
 
 const escanearQR = async (token, alumno_id, guardia_id) => {
+    const conn = await tokensRepo.obtenerConexion();
     try {
-        await tokensRepo.iniciar();
-        const exito = await tokensRepo.usarToken(token, alumno_id);
+        await conn.beginTransaction();
+        const exito = await tokensRepo.usarToken(token, alumno_id, conn);
         
         if (exito === 0) {
-            await tokensRepo.cancelar();
+            await conn.rollback();
             throw new Error("Token invalido");
         }
 
-        await asistenciaRepo.registrarAsistencia(alumno_id, guardia_id);
-        await tokensRepo.crearToken(crypto.randomUUID(), guardia_id);
-        await tokensRepo.confirmar();
+        await asistenciaRepo.registrarAsistencia(alumno_id, guardia_id, conn);
+        await tokensRepo.crearToken(crypto.randomUUID(), guardia_id, conn);
+        await conn.commit();
         return true;
     } catch (error) {
-        await tokensRepo.cancelar();
+        await conn.rollback();
         throw error;
+    } finally {
+        conn.release();
     }
 };
 

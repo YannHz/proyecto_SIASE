@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
-const BACKEND = 'http://80.241.217.53:3000';
+const BACKEND = 'http://localhost:3000';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), basicSsl()],
   server: {
     port: 4000,
     host: true,
@@ -38,3 +39,4 @@ export default defineConfig({
     }
   }
 })
+

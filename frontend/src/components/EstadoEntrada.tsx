@@ -12,14 +12,21 @@ interface Props {
 export default function EstadoEntrada({ alumno, guardiaId, onRefresh }: Props) {
   const [loading, setLoading] = useState(false);
   const disabled = !alumno || loading;
-  
+
   const handleEntrada = async () => {
     if (!alumno || !guardiaId) return;
     setLoading(true);
+
+    // 1. Recuperamos el token almacenado
+    const token = localStorage.getItem("auth_token");
+
     try {
       const resp = await fetch(`${API_BASE}/api/registro_dispositivo/${alumno.id}/marcar-entrada`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Inyectamos el token en la cabecera
+        },
         body: JSON.stringify({ guardia_id: guardiaId })
       });
       if (resp.ok) {
@@ -37,9 +44,17 @@ export default function EstadoEntrada({ alumno, guardiaId, onRefresh }: Props) {
   const handleSalida = async () => {
     if (!alumno) return;
     setLoading(true);
+
+    // 2. Recuperamos el token almacenado
+    const token = localStorage.getItem("auth_token");
+
     try {
       const resp = await fetch(`${API_BASE}/api/registro_dispositivo/${alumno.id}/marcar-salida`, {
-        method: 'PUT'
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Inyectamos el token en la cabecera
+        }
       });
       if (resp.ok) {
         if (onRefresh) onRefresh();
@@ -76,17 +91,17 @@ export default function EstadoEntrada({ alumno, guardiaId, onRefresh }: Props) {
       <div className="card-title center">
         ESTADO DE ENTRADA Y FECHAS DE ENTRADA
       </div>
-      
+
       <div className="estado-content">
         <div className="action-buttons">
-          <button 
+          <button
             disabled={disabled || alumno?.estado !== 0}
             className="btn-action btn-entrada"
             onClick={handleEntrada}
           >
             {loading ? '...' : 'ENTRADA'}
           </button>
-          <button 
+          <button
             disabled={disabled || alumno?.estado !== 1}
             className="btn-action btn-salida"
             onClick={handleSalida}
@@ -94,13 +109,13 @@ export default function EstadoEntrada({ alumno, guardiaId, onRefresh }: Props) {
             {loading ? '...' : 'SALIDA'}
           </button>
         </div>
-        
+
         {alumno && (
           <div className="ultimo-registro">
-            Estado actual: 
+            Estado actual:
             <span className={`registro-estado ${getEstadoClass(alumno.estado)}`}>
               {getEstadoLabel(alumno.estado)}
-            </span> 
+            </span>
             {alumno.fecha_envio && (
               <> enviado el {new Date(alumno.fecha_envio).toLocaleDateString()}</>
             )}

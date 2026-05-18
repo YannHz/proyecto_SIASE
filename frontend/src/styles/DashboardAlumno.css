@@ -13,6 +13,7 @@
   gap: 0;
   overflow-y: auto;
   border-left: 1px solid #E5E7EB;
+  transition: all 0.3s ease;
 }
 
 .alumno-info-panel .avatar-container {
@@ -440,7 +441,121 @@
   text-transform: uppercase;
 }
 
-.alumno-topbar-sub {
-  font-size: var(--text-detail);
-  color: var(--color-secondary-text);
+/* ======================================================
+   Responsive — Tablet (≤ 1024px)
+   ====================================================== */
+@media (max-width: 1024px) {
+  /* Panel de alumno pasa a barra horizontal inferior */
+  .alumno-info-panel {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #E5E7EB;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 16px 20px;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .alumno-info-panel .barra-lateral-header {
+    display: none; /* ocultar título "ALUMNO" en horizontal */
+  }
+
+  .alumno-info-panel .avatar-container {
+    margin-bottom: 0;
+  }
+
+  .alumno-info-panel .avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .alumno-info-panel .avatar-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .alumno-info-panel .alumno-info-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    flex: 1;
+  }
+
+  .alumno-info-panel .info-item {
+    min-width: 120px;
+  }
+
+  .dispositivos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ======================================================
+   Responsive — Móvil (≤ 640px)
+   ====================================================== */
+@media (max-width: 640px) {
+  /* Panel de alumno: más compacto */
+  .alumno-info-panel {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .alumno-info-panel .avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .alumno-info-panel .avatar-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .alumno-info-panel .alumno-info-list {
+    gap: 8px 16px;
+  }
+
+  /* Dispositivos en 1 columna */
+  .dispositivos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Topbar más compacto */
+  .alumno-topbar {
+    padding: 10px 12px;
+  }
+
+  .alumno-topbar-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Modal: 1 columna */
+  .modal-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-card {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-modal-cancel,
+  .btn-modal-submit {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
+
+  /* Botones de acción más grandes (touch-friendly) */
+  .btn-accion-alumno {
+    height: 52px;
+    max-width: 100%;
+    font-size: 15px;
+  }
 }

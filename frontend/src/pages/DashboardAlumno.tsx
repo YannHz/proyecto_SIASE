@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User, Laptop, MonitorSmartphone, Plus, Send, ChevronRight } from 'lucide-react';
+import { User, Laptop, MonitorSmartphone, Plus, Send, ChevronRight, QrCode } from 'lucide-react';
 
 import NavbarAlumno from '../components/NavbarAlumno';
 import DetallesItem from '../components/DetallesItem';
@@ -15,8 +15,7 @@ import '../styles/DetallesItem.css';
 import '../styles/EstadoEntrada.css';
 import '../styles/BarraLateral.css';
 
-
-
+/* ---- Tipos locales ---- */
 interface Dispositivo {
   id: number;
   tipo: string;
@@ -68,22 +67,50 @@ export default function DashboardAlumno() {
 
     const user = JSON.parse(userData);
     obtenerAlumno(user.id)
-      .then(data => { setAlumno(data); fetchDispositivos(user.id); fetchSolicitudes(user.id); })
+      .then(data => {
+        setAlumno(data);
+        fetchDispositivos(user.id);
+        fetchSolicitudes(user.id);
+      })
       .catch(() => navigate('/login'));
   }, [navigate]);
 
-  const fetchDispositivos = (id: number) => {
-    fetch(`${API_BASE}/api/registro_dispositivo/alumno/${id}/dispositivos`)
-      .then(r => r.json())
-      .then(setDispositivos)
-      .catch(console.error);
+  const fetchDispositivos = async (id: number) => {
+    const token = localStorage.getItem("auth_token");
+    try {
+      const resp = await fetch(`${API_BASE}/api/registro_dispositivo/alumno/${id}/dispositivos`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        setDispositivos(data);
+      }
+    } catch (error) {
+      console.error("Error al buscar dispositivos:", error);
+    }
   };
 
-  const fetchSolicitudes = (id: number) => {
-    fetch(`${API_BASE}/api/registro_dispositivo/alumno/${id}/solicitudes`)
-      .then(r => r.json())
-      .then(setSolicitudes)
-      .catch(console.error);
+  const fetchSolicitudes = async (id: number) => {
+    const token = localStorage.getItem("auth_token");
+    try {
+      const resp = await fetch(`${API_BASE}/api/registro_dispositivo/alumno/${id}/solicitudes`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        setSolicitudes(data);
+      }
+    } catch (error) {
+      console.error("Error al buscar solicitudes:", error);
+    }
   };
 
   const handleRegistroExitoso = () => {
@@ -94,11 +121,17 @@ export default function DashboardAlumno() {
   const handleEnviarSolicitud = async () => {
     if (!selectedDispositivo || !alumno) return;
     setEnviandoSolicitud(true);
+
+    const token = localStorage.getItem("auth_token");
+
     try {
 
       const resp = await fetch(`${API_BASE}/api/registro_dispositivo/solicitud-ingreso`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({
           alumno_id: alumno.id,
           dispositivo_id: selectedDispositivo.id,
@@ -121,21 +154,21 @@ export default function DashboardAlumno() {
 
   const solicitudActiva = selectedDispositivo
     ? solicitudes
-        .filter(s => s.dispositivo_id === selectedDispositivo.id)
-        .sort((a, b) => b.id - a.id)[0] ?? null
+      .filter(s => s.dispositivo_id === selectedDispositivo.id)
+      .sort((a, b) => b.id - a.id)[0] ?? null
     : null;
 
 
   const selectedForDetalles = selectedDispositivo
     ? {
-        id: selectedDispositivo.id,
-        idsenati: alumno?.idsenati ?? '',
-        marca: selectedDispositivo.marca,
-        modelo: selectedDispositivo.modelo,
-        tipo: selectedDispositivo.tipo,
-        numero_serie: selectedDispositivo.numero_serie,
-        descripcion: selectedDispositivo.descripcion,
-      }
+      id: selectedDispositivo.id,
+      idsenati: alumno?.idsenati ?? '',
+      marca: selectedDispositivo.marca,
+      modelo: selectedDispositivo.modelo,
+      tipo: selectedDispositivo.tipo,
+      numero_serie: selectedDispositivo.numero_serie,
+      descripcion: selectedDispositivo.descripcion,
+    }
     : null;
 
   if (!alumno) {
@@ -257,14 +290,22 @@ export default function DashboardAlumno() {
                       !selectedDispositivo
                         ? 'Selecciona un dispositivo primero'
                         : solicitudActiva && solicitudActiva.estado !== 2
-                        ? 'Ya existe una solicitud activa para este dispositivo'
-                        : 'Enviar solicitud de ingreso al vigilante'
+                          ? 'Ya existe una solicitud activa para este dispositivo'
+                          : 'Enviar solicitud de ingreso al vigilante'
                     }
                   >
                     <Send size={18} />
                     {enviandoSolicitud ? 'Enviando…' : 'Solicitar Ingreso'}
                   </button>
 
+                  <button
+                    className="btn-accion-alumno btn-escaner"
+                    onClick={() => navigate('/escaner-alumno')}
+                    style={{ backgroundColor: '#2d3e50', color: 'white' }}
+                  >
+                    <QrCode size={18} />
+                    Escaneo QR
+                  </button>
 
                   {solicitudActiva && (
                     <div className={`solicitud-estado ${ESTADO_CLASS[solicitudActiva.estado] ?? ''}`}>

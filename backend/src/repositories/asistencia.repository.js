@@ -1,7 +1,13 @@
 const db = require('../config/db');
 
+<<<<<<< HEAD
 const registrarAsistencia = async (alumno_id, guardia_id) => {
     await db.promise().query(
+=======
+const registrarAsistencia = async (alumno_id, guardia_id, conn = null) => {
+    const q = conn || db.promise();
+    await q.query(
+>>>>>>> 7a3c77d65e4776a53c4315359f5f67f25c5af21c
         "INSERT INTO asistencia (alumno_id, guardia_id, fecha, hora_ingreso) VALUES (?, ?, CURDATE(), CURTIME())",
         [alumno_id, guardia_id]
     );
@@ -83,6 +89,7 @@ const obtenerAsistenciasRepo = async (filtros) => {
     return result;
 };
 
+<<<<<<< HEAD
 const obtenerAsistenciaPorAlumnoRepo = async (alumnoId) => {
     const sql = `
         SELECT
@@ -105,11 +112,34 @@ const obtenerAsistenciaPorAlumnoRepo = async (alumnoId) => {
     `;
     const [rows] = await db.promise().query(sql, [alumnoId]);
     return rows;
+=======
+const buscarTokenActivo = async (token, conn = null) => {
+    const q = conn || db.promise();
+    const [rows] = await q.query(
+        "SELECT id, guardia_id FROM tokens_vigilante WHERE token = ? AND estado = 'activo' LIMIT 1",
+        [token]
+    );
+    return rows.length > 0 ? rows[0] : null;
+};
+
+const marcarTokenUsado = async (token, alumno_id, conn = null) => {
+    const q = conn || db.promise();
+    const [result] = await q.query(
+        "UPDATE tokens_vigilante SET estado = 'usado', alumno_id = ? WHERE token = ? AND estado = 'activo'",
+        [alumno_id, token]
+    );
+    return result.affectedRows;
+>>>>>>> 7a3c77d65e4776a53c4315359f5f67f25c5af21c
 };
 
 module.exports = {
     registrarAsistencia,
     obtenerUltimoEscaneoRepo,
     obtenerAsistenciasRepo,
+<<<<<<< HEAD
     obtenerAsistenciaPorAlumnoRepo
+=======
+    buscarTokenActivo,
+    marcarTokenUsado
+>>>>>>> 7a3c77d65e4776a53c4315359f5f67f25c5af21c
 };

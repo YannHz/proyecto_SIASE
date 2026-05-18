@@ -1,0 +1,82 @@
+/* =========================================
+   QR Vigilante — Estilos responsive
+   ========================================= */
+
+.qr-card {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+}
+
+/* Contenedor del código QR con fondo blanco */
+.qr-code-wrapper {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4px;
+}
+
+/* Placeholder de carga */
+.qr-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: min(70vw, 250px);
+  height: min(70vw, 250px);
+  color: var(--color-secondary-text);
+  font-size: var(--text-body);
+}
+
+/* Ícono de carga rotando */
+.qr-loading-icon {
+  animation: spin 1.5s linear infinite;
+  color: var(--color-nav-bg);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Texto indicador */
+.qr-hint {
+  margin: 16px 0;
+  color: var(--color-secondary-text);
+  font-size: 0.875rem;
+}
+
+/* Panel de último escaneo */
+.qr-last-scan {
+  max-width: 480px;
+  width: 100%;
+  margin-top: 16px;
+  border-color: var(--color-btn-green) !important;
+  background-color: #F0FDF4;
+}
+
+/* ── Móvil ───────────────────────────── */
+@media (max-width: 640px) {
+  .qr-card {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .qr-code-wrapper {
+    padding: 14px;
+  }
+
+  .qr-last-scan {
+    max-width: 100%;
+  }
+
+  .qr-hint {
+    font-size: 0.8rem;
+  }
+}

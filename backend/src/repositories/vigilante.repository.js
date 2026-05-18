@@ -52,9 +52,9 @@ class VigilanteRepository {
         return rows;
     }
 
-    async obtenerVigilantePorCredenciales(usuario, password) {
-        const query = "SELECT id, guardia_id, nombre, apellido, turno, password_vigilante, estado FROM vigilante WHERE guardia_id = ? AND password_vigilante = ? AND estado = 1";
-        const [rows] = await pool.promise().query(query, [usuario, password]);
+    async obtenerVigilantePorCredenciales(usuario) {
+        const query = "SELECT id, guardia_id, nombre, apellido, turno, password_vigilante, estado FROM vigilante WHERE guardia_id = ? AND estado = 1";
+        const [rows] = await pool.promise().query(query, [usuario]);
         return rows;
     }
 }
